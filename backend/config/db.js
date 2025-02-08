@@ -1,16 +1,21 @@
-const mongoose = require("mongoose");
+const mysql = require('mysql');
+const dotenv = require('dotenv');
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("✅ MongoDB Connected Successfully");
-  } catch (error) {
-    console.error("❌ MongoDB Connection Failed:", error);
+dotenv.config();
+
+const db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password:'',
+  database: process.env.DB_NAME,
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error('Database connection failed:', err.message);
     process.exit(1);
   }
-};
+  console.log('MySQL Database Connected!');
+});
 
-module.exports = connectDB;
+module.exports = db;
