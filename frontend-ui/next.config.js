@@ -1,7 +1,7 @@
 module.exports = {
   images: {
-    domains: ['knockoncesoft.in.net'],
+    domains: ['http//localhost', 'http//knockoncesoft.in.net'],
   },
-  output: 'export',
+  distDir: 'out',
 };
 

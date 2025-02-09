@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const db = require('./config/db');
 const userRoutes = require('./routes/authRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api', userRoutes);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/public/uploads", express.static("public/uploads"));
 
 app.get('/', (req, res) => {
   res.send('API is running...');
